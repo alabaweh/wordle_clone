@@ -1,0 +1,65 @@
+@import url('https://fonts.googleapis.com/css2?family=Open+Sans:wght@600&display=swap');
+
+body {
+
+    font-family: 'Open Sans', sans-serif;
+    margin: 0;
+    padding: 1rem 2rem;
+    background-color: #121213;
+    color: hsl(0, 0%, 100%);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-transform: uppercase;
+
+}
+
+h1 {
+
+    font-family: 'Open Sans', sans-serif;
+    font-size: 2rem;
+    letter-spacing: 0.2rem;
+    margin-bottom: 2px;
+    /*border-bottom: solid 1px hsl(0, 0%, 70%);*/
+}
+
+
+
+.guess {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    grid-gap: 5px;
+    width: 270px;
+}
+
+.guess_tile {
+    border: 3px solid hsl(0, 0%, 26%);
+    width: 50px;
+    height: 50px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 2rem;
+    font-weight: bold;
+}
+
+
+.message {
+    height: 30px;
+    margin-top: 30px;
+}
+
+.message p {
+    background-color: #818384;
+    border-radius: 10px;
+    padding: 10px;
+    margin-top: 0px;
+    text-transform: none;
+}
+
+.game{
+
+
+
+}
