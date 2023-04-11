@@ -5,12 +5,22 @@ let pressedKeys = [];
 const tiles = document.querySelector('.game');
 let display = document.querySelector('.message');
 
+let keyboard = document.querySelector('.keyboard');
+
 const rows = 6;
 const columns = 5;
 const my2DArray = Array.from({ length: rows }, () => new Array(columns));
 
 
-let guessTiles = document.querySelectorAll(`#guessrow-${currentGuessId} .guess_tile`);;
+let guessTiles = document.querySelectorAll(`#guessrow-${currentGuessId} .guess_tile`);
+
+const letters = [
+    'Q', 'W', 'E', 'R', 'T', 'Y',
+    'U', 'I', 'O', 'P', 'A', 'S',
+    'D', 'F', 'G', 'H', 'J', 'K',
+    'L', 'ENTER', 'Z', 'X', 'C', 'V',
+    'B', 'N', 'M', '«'
+];
 
 
 
@@ -31,50 +41,130 @@ my2DArray.forEach((row, rowIndex) => {
 });
 
 
-document.addEventListener('keydown', function(event) {
+function handleInput(letter) {
+
+    console.log(`handleinput`);
     guessTiles = document.querySelectorAll(`#guessrow-${currentGuessId} .guess_tile`);
 
-    if (/^[a-zA-Z]$/.test(event.key) && currentTile < my2DArray[currentGuessId].length) {
-
-        guessTiles[currentTile].textContent = event.key.toUpperCase();
-        my2DArray[currentGuessId][currentTile] = event.key.toUpperCase();
-        pressedKeys.push(event.key.toUpperCase());
+    if (currentTile < my2DArray[currentGuessId].length) {
+        guessTiles[currentTile].textContent = letter.toUpperCase();
+        my2DArray[currentGuessId][currentTile] = letter.toUpperCase();
+        pressedKeys.push(letter.toUpperCase());
         currentTile++;
+
+        console.log(`inside handleinput`);
     }
-});
+}
 
-document.addEventListener('keydown', function(event) {
+function handleDelete() {
 
-    if (event.key === 'Backspace' && currentTile > 0 ) {
+    console.log(`handleDelete`);
+    guessTiles = document.querySelectorAll(`#guessrow-${currentGuessId} .guess_tile`);
+
+    if (currentTile > 0 ) {
         guessTiles[--currentTile].textContent = "";
         my2DArray[currentGuessId][currentTile] = "";
         pressedKeys.pop(); // Remove the last element from the array
     }
-});
+}
 
-document.addEventListener('keydown', function(event) {
-    if (event.key === 'Enter' && currentTile === 5) {
+let isValidating = false;
+function handleValide() {
+    console.log(`handleValide`);
+
+    if (currentTile === 5 && !isValidating) {
+        isValidating = true;
         const word = pressedKeys.join("");
         isValidEnglishWord(word).then((isValid) => {
-
             if (isValid) {
-
+                console.log(`handle is Valide`);
                 currentGuessId++;
                 currentTile = 0;
                 pressedKeys = [];
-
-                // displaymessage('Not a valid word');
-
-            }
-            else {
-
+            } else {
                 displaymessage('Not in word list');
             }
-
-
+            isValidating = false; // reset the flag
         });
+    } else if (currentTile < 5) {
+        displaymessage('Not enough letters');
+    }
+}
+
+
+// document.removeEventListener('keydown', function(event) {
+//     if (/^[a-zA-Z]$/.test(event.key)) {
+//         handleInput(event.key);
+//     } else if (event.key === 'Backspace') {
+//         handleDelete();
+//     } else if (event.key === 'Enter' && currentTile === 5) {
+//         handleValide();
+//     }
+// });
+
+
+
+// For device keyboard
+document.addEventListener('keydown', function(event) {
+    if (/^[a-zA-Z]$/.test(event.key)) {
+        handleInput(event.key);
+    } else if (event.key === 'Backspace') {
+        handleDelete();
+    } else if (event.key === 'Enter') {
+        handleValide();
     }
 });
+
+// For onscreen keyboard
+letters.forEach((letter) => {
+    const key = document.createElement('button');
+    key.classList.add('key');
+    key.textContent = letter;
+    key.setAttribute(`id`, `${letter}`);
+    if (letter === '«') {
+        key.addEventListener('click', () =>handleDelete());
+    } else if(letter === 'ENTER'  ){
+        key.addEventListener('click', () =>handleValide());
+
+        // key.addEventListener('click', () => {
+        //     if (currentTile === 5) {
+        //         handleValide();
+        //     }
+        // });
+    }
+    else {
+        key.addEventListener('click', () => handleInput(letter));
+    }
+    keyboard.appendChild(key);
+});
+
+
+
+
+
+// document.addEventListener('keydown', function(event) {
+//     if ((event.key === 'Enter' || keyclick(letter) === 'ENTER')  && currentTile === 5) {
+//         const word = pressedKeys.join("");
+//         isValidEnglishWord(word).then((isValid) => {
+//
+//             if (isValid) {
+//
+//                 currentGuessId++;
+//                 currentTile = 0;
+//                 pressedKeys = [];
+//
+//                 // displaymessage('Not a valid word');
+//
+//             }
+//             else {
+//
+//                 displaymessage('Not in word list');
+//             }
+//
+//
+//         });
+//     }
+// });
 
 function displaymessage(mssg) {
     let message_p = document.createElement(`p`);

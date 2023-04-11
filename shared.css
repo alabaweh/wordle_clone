@@ -26,17 +26,24 @@ h1 {
 
 
 
+.content {
+    flex-grow: 5;
+}
+
+
+
+
 .guess {
     display: grid;
     grid-template-columns: repeat(5, 1fr);
     grid-gap: 5px;
-    width: 270px;
+    width: 396px;
 }
 
 .guess_tile {
     border: 3px solid hsl(0, 0%, 26%);
-    width: 50px;
-    height: 50px;
+    width: 75px;
+    height: 75px;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -45,9 +52,21 @@ h1 {
 }
 
 
+/* Add these styles */
+.center-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
 .message {
-    height: 30px;
-    margin-top: 30px;
+    margin: 75px 0px; /* Remove the horizontal margin */
+    height: 50px; /* Reserve space for the message */
+    position: relative; /* Add this line */
+    display: flex; /* Add this line */
+    justify-content: center; /* Add this line */
+    align-items: center; /* Add this line */
+    width: 100%; /* Add this line */
 }
 
 .message p {
@@ -56,10 +75,49 @@ h1 {
     padding: 10px;
     margin-top: 0px;
     text-transform: none;
+    position: absolute; /* Keep this line to position the message within the reserved space */
+    white-space: nowrap; /* Add this line to prevent line breaks */
 }
 
-.game{
 
 
 
+
+
+.keyboard {
+    width: 640px;
+    display: flex;
+    flex-wrap: wrap;
+    position: absolute; /* Keep as absolute */
+    bottom: 65px;
+    left: 50%; /* Center the keyboard horizontally */
+    transform: translateX(-50%); /* Shift the keyboard to the left by half its width */
+}
+
+/* Keep the padding at the bottom */
+body {
+    padding-bottom: 70px;
+}
+
+.keyboard button {
+    width: 53px;
+    height: 68px;
+    border-radius: 4px;
+    border: none;
+    background-color: #818384;
+    margin: 4px;
+}
+
+.keyboard button:nth-child(11) {
+    margin-left: 45px;
+}
+
+.keyboard button:nth-child(20),
+.keyboard button:nth-child(28) {
+    width: 73px;
+
+}
+
+.keyboard button:nth-child(20) {
+    margin-left: 20px; /* Increase the margin-left value to move the line to the right */
 }
