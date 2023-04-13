@@ -220,7 +220,7 @@ function getRandomWord() {
 
 
 // Call the function to get a random word
-getRandomWord();
+getRandomWord()
 
 // this is to check if the user input is a valid word
 let checkword = "";

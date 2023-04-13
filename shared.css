@@ -20,7 +20,7 @@ h1 {
     font-family: 'Open Sans', sans-serif;
     font-size: 2rem;
     letter-spacing: 0.2rem;
-    margin-bottom: 2px;
+    margin-bottom: 0.13rem; /*2px;*/
     /*border-bottom: solid 1px hsl(0, 0%, 70%);*/
 }
 
@@ -36,14 +36,14 @@ h1 {
 .guess {
     display: grid;
     grid-template-columns: repeat(5, 1fr);
-    grid-gap: 5px;
-    width: 396px;
+    grid-gap: 0.3rem; /*5px;*/
+    width: 24.75rem; /*396px;*/
 }
 
 .guess_tile {
-    border: 3px solid hsl(0, 0%, 26%);
-    width: 75px;
-    height: 75px;
+    border:  0.188rem solid hsl(0, 0%, 26%); /*3px*/
+    width: 4.688rem; /*75px;*/
+    height: 4.688rem; /*75px;*/
     display: flex;
     align-items: center;
     justify-content: center;
@@ -60,8 +60,8 @@ h1 {
 }
 
 .message {
-    margin: 75px 0px; /* Remove the horizontal margin */
-    height: 50px; /* Reserve space for the message */
+    margin: 4.688rem 0px; /*75px;*/ /* Remove the horizontal margin */
+    height: 3.125rem;/*50px*/ /* Reserve space for the message */
     position: relative; /* Add this line */
     display: flex; /* Add this line */
     justify-content: center; /* Add this line */
@@ -71,8 +71,8 @@ h1 {
 
 .message p {
     background-color: #818384;
-    border-radius: 10px;
-    padding: 10px;
+    border-radius: 0.625rem;/*10px;*/
+    padding: 0.625rem;/*10px;*/
     margin-top: 0px;
     text-transform: none;
     position: absolute; /* Keep this line to position the message within the reserved space */
@@ -85,11 +85,11 @@ h1 {
 
 
 .keyboard {
-    width: 640px;
+    width: 40rem; /*640px;*/
     display: flex;
     flex-wrap: wrap;
     position: absolute; /* Keep as absolute */
-    bottom: 65px;
+    bottom: 4.063rem; /*65px;*/
     left: 50%; /* Center the keyboard horizontally */
     transform: translateX(-50%); /* Shift the keyboard to the left by half its width */
 }
@@ -120,4 +120,60 @@ body {
 
 .keyboard button:nth-child(20) {
     margin-left: 20px; /* Increase the margin-left value to move the line to the right */
+}
+
+/* Small devices (landscape phones, 576px and up) */
+@media (min-width: 576px) {
+    .guess {
+        grid-gap: 2px;
+        width: 290px;
+    }
+
+    .guess_tile {
+        width: 55px;
+        height: 55px;
+        font-size: 1.6rem;
+    }
+}
+
+/* Medium devices (tablets, 768px and up) */
+@media (min-width: 768px) {
+    .guess {
+        grid-gap: 3px;
+        width: 320px;
+    }
+
+    .guess_tile {
+        width: 60px;
+        height: 60px;
+        font-size: 1.8rem;
+    }
+}
+
+/* Large devices (desktops, 992px and up) */
+@media (min-width: 992px) {
+    .guess {
+        grid-gap: 4px;
+        width: 356px;
+    }
+
+    .guess_tile {
+        width: 65px;
+        height: 65px;
+        font-size: 1.9rem;
+    }
+}
+
+/* Extra large devices (large desktops, 1200px and up) */
+@media (min-width: 1200px) {
+    .guess {
+        grid-gap: 5px;
+        width: 396px;
+    }
+
+    .guess_tile {
+        width: 75px;
+        height: 75px;
+        font-size: 2rem;
+    }
 }
